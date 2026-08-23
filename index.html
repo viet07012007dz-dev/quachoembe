@@ -463,7 +463,8 @@
     <!-- TIN NHẮN -->
     <section class="panel" id="p-tin">
       <h2>For my pretty princess</h2>
-      <div class="sub">Hãy chạm vào phong thư để mở nhé...</div>
+      <!-- Đã thêm id="tin-sub" vào thẻ này để xử lý biến mất -->
+      <div class="sub" id="tin-sub">Hãy chạm vào phong thư để mở nhé...</div>
       
       <div class="letter-container">
         <div class="env-wrapper" id="env-wrapper" onclick="openLetter()">
@@ -475,9 +476,9 @@
         <div id="flower-burst"></div>
         <div class="vintage-letter" id="vintage-letter">
           <h3>Gửi elm bíe của anh,</h3>
-          <p>Mỗi khoảnh khắc ở bên cạnh em đều là một trang giấy rực rỡ nhất trong thanh xuân của anh. Nụ cười của em giống như nắng ấm, xua đi những mệt mỏi và luôn dịu dàng chữa lành mọi thứ xung quanh.</p>
-          <p>Dù có qua bao nhiêu sinh nhật đi nữa, anh vẫn sẽ luôn ở đây, cùng em bóc quà, ngắm em cười và nắm chặt tay em bước tiếp trên những chặng đường sắp tới.</p>
-          <p>Yêu em nhiều hơn những gì chữ nghĩa có thể diễn tả. Chúc em một tuổi mới luôn bình an, rạng rỡ và mãi là công chúa nhỏ của anh.</p>
+          <p>Mỗi khoảnh khắc ở bên cạnh em đều là một trang giấy rực rỡ nhất trong thanh xuân của anh. Cảm ơn em vì đã xuất hiện, đồng hành và luôn chia sẻ mọi niềm vui và nỗi buồn cùng anh trong suốt hơn 3 năm qua.</p>
+          <p>Dù có qua bao nhiêu sinh nhật đi nữa, anh vẫn mong có thể được là người chuẩn bị cho em những món quà, tạo cho em những điều bất ngờ và thấy được gương mặt hạnh phúc của em mỗi khi nhận được những món quà của anh tặng.</p>
+          <p>Yêu em nhiều hơn những gì chữ nghĩa có thể diễn tả. Mong em luôn được xinh đẹp, khỏe mạnh, yêu đời, tích cực, may mắn, rạng rỡ và mãi là công chúa nhỏ của anhhhhh.</p>
           <div class="signature">Vịt thúi iu elmmmmm</div>
         </div>
       </div>
@@ -529,7 +530,8 @@
         x: (start.x+target.x)/2 + (Math.random()-0.5)*220,
         y: (start.y+target.y)/2 + (Math.random()-0.5)*220
       };
-      particles.push({ start, ctrl, target, prev:{...start}, delay: Math.random()*0.5, dur: 1.6 + Math.random()*0.9 });
+      // Đã tăng thời gian vẽ trái tim lên (khoảng ~15s tổng cộng)
+      particles.push({ start, ctrl, target, prev:{...start}, delay: Math.random()*1.5, dur: 8 + Math.random()*2 });
     }
 
     ctx.fillStyle = '#050101';
@@ -567,7 +569,8 @@
       if(allDone && !animDone){
         animDone = true;
         setTimeout(() => nameEl.classList.add('show'), 200);
-        setTimeout(() => introEl.classList.add('hide'), 2400);
+        // Tăng thời gian chờ hiển thị tên trước khi chuyển cảnh
+        setTimeout(() => introEl.classList.add('hide'), 3500);
         shimmer();
       }
     }
@@ -591,7 +594,8 @@
           }
         });
         count++;
-        if(count < 140 && !introEl.classList.contains('hide')) requestAnimationFrame(loop);
+        // Tăng số khung hình shimmer cho phù hợp với thời gian dài hơn
+        if(count < 250 && !introEl.classList.contains('hide')) requestAnimationFrame(loop);
       }
       loop();
     }
@@ -699,6 +703,14 @@
     if (env.classList.contains('open')) return;
     
     env.classList.add('open');
+
+    // -- ĐOẠN CODE LÀM MỜ DÒNG CHỮ KHI MỞ THƯ --
+    const subText = document.getElementById('tin-sub');
+    if (subText) {
+      subText.style.transition = 'opacity 0.8s ease';
+      subText.style.opacity = '0';
+    }
+    
     const burst = document.getElementById('flower-burst');
     const flowers = ['🌸', '🌺', '🌷', '💮', '✨', '💖', '🏵️', '🌹'];
     
